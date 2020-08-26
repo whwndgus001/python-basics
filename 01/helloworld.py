@@ -24,7 +24,7 @@ def my_func(i):
 
 #함수 호출
 my_func(20)
-
+dfasdfkasdfklasdf
 
 
 
