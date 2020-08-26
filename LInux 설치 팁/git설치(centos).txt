@@ -1,0 +1,60 @@
+﻿git 설치(centos)
+
+1. zlib 설치
+1) download
+    http://www.zlib.net/fossils/zlib-1.2.8.tar.gz
+2) # tar xvfz zlib-1.2.8.tar.gz
+    # cd  zlib-1.2.8
+3) # ./configure --prefix=/usr/local
+4) # make
+    # make install
+
+2. perl 라이브러리 설치
+# yum -y install perl-devel
+
+3. gettext 라이브러리 설치
+# yum -y install gettext
+
+4. curl-devel 설치
+# yum -y install curl-devel
+
+5. git 설치
+1) git download
+https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.6.4.tar.gz
+2) # tar xvfz git-2.6.4.tar.gz
+    # cd   git-2.6.4
+3) # ./configure --prefix=/usr/local/ds/git2.6.4
+4) # make
+    # make install
+5) ln -s /usr/local/ds/git2.6.4 /usr/local/ds/git
+6) path 설정
+    # vi /etc/profile
+       ===============================
+       export PATH=${PATH}:/usr/local/ds/git/bin
+       ================================ 
+        내용 추가 
+   # source /etc/profile
+7. 확인
+   # git --version
+git version 2.6.4 
+  
+
+8.git 사용자 설정(전역)
+  # git config --global user.name "whwndgus001"
+
+  # git config --global user.email "whwndgus0000@naver.com"
+
+9.push 비번 저장(레포지토리)
+
+  # git config credential.helper store
+  # git add -A
+  # git commit "java code 추가"
+  # git push
+
+ --첫번쨰 commit 및 push: 아이디와 비밀번호를 세팅
+  # git config --global credential.helper 'cache --timeout 2592000' 
+
+
+
+
+ ERD(Entity Relation Diagram)

@@ -1,0 +1,55 @@
+cd proc
+
+echo "Hello World" > hello.txt
+echo "Hello World" > hello.txt /dev/tty0 하면 0번 디바이스에 출력
+cat hello.txt > txt에 내용이 출력
+cat /proc/1029/ 프로세서의 정보가 나온다.
+
+
+/boot 디렉토리는 파티션을 /root와 파티션을 따로 나누어 주어야한다.
+
+
+/root 디렉토리의 문제가 생겼을때 부팅조차 되지않으면 시스템 상 오류를 해결할 수 없기 때문이다.
+
+즉 파티션의 오류가 생기면 나누어놓은 파티션에게 영향이 가지 않도록 하기 위함이다.
+
+
+
+void hello();
+
+
+hello.c -> hello.o => libhello.a
+main.c -> main.o
+
+
+libhello.a
+libhello.so
+
+
+	-> hello 3
+	-> hello 2
+main.o +-> hello
+
+
+
+1)
+create database employees;
+
+2)
+create user 'employees'@'192.168.1.%' identified by 'employees';
+
+3)
+grant all privileges on employees.* to 'employees'@'192.168.1.%';
+
+4)
+flush privileges;
+
+
+5)
+
+cd employees_db
+
+
+mysql -u root -D employees -p < employees.sql;
+
+

@@ -1,0 +1,163 @@
+
+
+
+디렉토리 rwx rx    7 5
+일반파일 rw r      6 4
+실행파일 rwx rx    7 5
+
+r rw rwx     
+wx x
+x  X 
+
+
+r rw rx rwx
+
+rwx
+421
+
+r rx rw rwx -> 4 5 6 7 0
+
+hello.c -> hello.o -> hello
+
+1.gcc-c hello.c ->hello.o      (complie)
+
+2.gcc-o hello hello.o -> hello (link)
+
+
+
+hello.c
+main.c
+
+#include
+int main(){
+{
+       hello();
+}
+
+
+
+hello.h
+
+void hello();
+:wq
+
+
+
+1. gcc-c hello.c -> hello.o
+   gcc-c main.c -> main.o
+
+2. gcc-o hello hello.o main.o
+
+
+
+
+vi Makefile
+
+
+#vi hello.c
+
+
+# touch *.c
+# make
+
+
+git 설치(centos)
+
+1. zlib 설치
+     wget  http://www.zlib.net/fossils/zlib-1.2.8.tar.gz
+
+2) # tar xvfz /zlib-1.2.8.tar.gz
+
+   # cd zlib tab
+
+   # ./configure --prefix=/usr/local
+   # cd zlib tab
+   # make & make install
+
+
+2. perl library 설치
+
+
+3 . gettext 라이브러리 설치
+
+#yum -y install gettext
+
+1) # yum -y install perl-devel
+
+yum -y install curl-devel
+
+
+
+
+3. git 설치
+
+
+
+https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.6.4.tar.gz
+# tar xvfz git-2.6.4.tar.gz
+
+#cd git-2.6.4
+
+# ./configure --prefix=/usr/local/ds/git-2.6.4
+
+
+# make & make installln
+
+
+ln -s /usr/local/ds/git-2.6.4 /usr/local/ds/git
+
+로컬  repository 만들기
+
+
+cd dowork
+
+git initc
+
+# ls -la
+
+# git add -A
+
+# git commit -m 'init commit'
+
+# git remote add origin https://github.com/whwndgus001/hello-world.git
+
+# git push -u origin master
+
+
+
+
+
+
+vi README.md 수정
+
+# git push
+
+
+
+
+
+방화벽 때문에 d에가서 22번포트 복붙 3306
+
+1. 데이터베이스 생성
+
+create database webdb;
+
+2.  mariadb 계정 생성
+
+
+create user'webdb'@'192.168.1.%' identified by 'webdb';
+
+3.권한주기
+
+grant all privileges on webdb.*to 'webdb'@'192.168.1.%';
+
+
+4. 사용자 계정 없애기
+
+drop user 'root'@'192.168.1.%';
+flush privileges;
+
+5.데이터베이스 삭제
+
+
+drop database webdb;

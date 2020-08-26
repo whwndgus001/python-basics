@@ -1,0 +1,54 @@
+concat (두 데이터를 합쳐주는 함수)
+
+
+
+distinct (중복되는것을 삭제해주는 함수)
+
+
+
+employees 테이블에서 
+
+
+order by hire_date desc; 입사일순으로 내림차순 정렬
+
+
+
+
+순서 
+select 절
+
+from절 
+
+where 절
+
+order by 절 순으로 진행된다.
+
+
+
+where hire_Date Like '1991-%'
+Like 함수는 그 해 입사한 모든 인원을 출력한다.
+
+
+
+date_format(hire_date, '%Y년 %m월 %d일 %h:%i:%s') as '입사일'
+출력되는 입사일의 형태를 년월일로 바꿔준다.
+
+-- 예제 : salaries 테이블에서 전체직원의 평균급여
+select emp_no, avg(salary)
+ from salaries
+where emp_no =10060;
+
+select 컬럼명, 컬럼명, 컬럼명, ...
+from 라이브러리명.테이블명
+where 데이터 가져올때 조건
+group by 그룹화 기준
+having 그룹바이절 조건
+order by 정렬기준 (desc)
+
+
+ -- 사원별 몇 번의 직책 변경이 있었는지 조회 :
+select emp_no, count(*) as cnt from titles
+group by emp_no
+order by cnt desc;
+
+

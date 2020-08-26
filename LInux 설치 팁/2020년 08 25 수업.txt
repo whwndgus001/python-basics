@@ -1,0 +1,584 @@
+join 조건은 n-1개가 있는것이 보통이다.
+
+inner join은 조인 조건의 맞는 형태만 출력한다 즉, null값은 출력되지 않는다.
+
+Catesian Join 은 n*m 형태로 출력하기때문에 데이터 양이 방대할경우 감당이 되지않아 자주 사용되지 않는다.
+
+대중적으로 equijoin을 많이 사용한다 기본형태는
+
+pk와 fk를 하나의 테이블로 합친후에
+
+select (*)
+
+from Song,Artist
+
+where Song.Artist_no =Artist.Artist_no
+
+
+outer join은 조인 조건의 맞지않는 형태도 모두 출력한다.
+
+
+
+
+-- -- ANSI / ISO SQL 1999 JOIN 문법 -- -- join ~ on 
+ select a.first_name, b.title
+  from employees a
+  join titles b on a.emp_no = b.emp_no  -- join condition
+  where b.to_date = '9999-01-01'-- select condition1
+  and a.gender = 'F'          -- select condition2
+  order by a.first_name asc;
+
+기본 join 형태와 다르게 join 되는 title b를 ,대신 join 앞에 적어주고
+where 절에 있던 a.emp_no = b.emp_no를 on으로 올려준다.
+
+
+-- natural join은 on절위에 a.emp_no = b.emp_no를 적어주지 않아도 자동으로 테이블에서 이름이 같은 것을 join 시킨다.
+테이블내에 같은항목이 한개 더 있다면 강제로 걸리는 문제점이 있다. 그로인하여 의도치않은 결과가 도출되기도 한다.
+
+ select a.first_name, b.title
+  from employees a
+  natural join titles b                 -- join condition
+    where b.to_date = '9999-01-01'-- select condition1
+    and a.gender = 'F'          -- select condition2
+  order by a.first_name asc;
+
+
+--join using
+on 절대신에 using 절을 밑에 사용한다.
+
+ select count(*)  from employees a
+  join titles b -- join condition
+  using (emp_no)
+  where b.to_date = '9999-01-01'	-- select condition1
+    and a.gender = 'F'          	-- select condition2
+order by a.first_name asc;
+
+
+insert into depart values(null, '개발팀');
+select * from depart;
+
+개발팀
+인프라팀
+cs팀
+총무팀
+영업팀
+
+insert into emp values(null, '둘리', 1);
+insert into emp values(null, '또치', 1);
+insert into emp values(null, '도우넛', 4);
+insert into emp values(null, '희동이', 3);
+insert into emp values(null, '마이콜', 2);
+insert into emp values(null, '길동이', null);
+
+select * from emp;
+
+select a.name, b.name
+  from emp a
+  left join depart b on a.depart_no = b.no;
+
+-- left join
+
+select a.name, ifnull(b.name, '없음')
+  from emp a
+  left join depart b on a.depart_no = b.no;
+
+-- right join
+
+select b.name, a.name
+  from emp a
+  right join depart b on a.depart_no = b.no;
+  group by b.name
+
+
+-- 부서별 사원수
+select *
+      from depart m.
+       (select  b.no, count(*) as cnt
+        from emp a
+        join depart b on a.depart_no = b.no
+  group by b.no) n
+where m.no = n.no
+
+
+select m.name, ifnull(n.cnt, 0)
+      from depart m.
+ left join  (select  b.no, count(*) as cnt
+        from emp a
+        join depart b on a.depart_no = b.no
+  group by b.no) n on m.no = n.no;
+
+
+-- Fai Bale이 근무하는 부서에서 근무하는 직원의 사번, 전체 이름을 출력해보세요.
+
+-- 개별 쿼리 해결 -> 안좋은 방법(절대 하지 마라, 가능하면 하나의 쿼리로 해결)
+
+select b.dept_no
+  from employees a, dept_emp b
+  where a.emp_no = b.emp_no
+   and b.to_date = '9999-01-01'
+   and concat(a.first_name, ' ', a.last_name) = 'Fai Bale';
+
+-- 서브쿼리를 사용해서 하나의 쿼리로 해결   
+
+select a.emp_no, concat(first_name ' ', last_name)
+  from employees a, dept_emp b
+  where a.emp_no = b.emp_no
+   and b.to_date = '9999-01-01'
+   and b.dept_no = 'd004';
+
+
+
+select b.dept_no
+  from employees a, dept_emp b
+  where a.emp_no = b.emp_no
+   and b.to_date = '9999-01-01'
+   and concat(a.first_name, ' ', a.last_name) = 'Fai Bale';
+   
+-- ex1 - sol2) 서브쿼리 사용
+select a.emp_no, concat(first_name ' ', last_name)
+  from employees a, dept_emp b
+  where a.emp_no = b.emp_no
+   and b.to_date = '9999-01-01'
+   and b.dept_no = (select b.dept_no
+  			from employees a, dept_emp b
+  			where a.emp_no = b.emp_no
+   			and b.to_date = '9999-01-01'
+   			and concat(a.first_name, ' ', a.last_name) = 'Fai Bale');  
+
+-- 단일행인 경우 : =, !=, >, <=, >=  
+
+
+
+-- ex1-sol3)
+-- join 사용
+select b.dept_no
+  from employees a, dept_emp b
+  where a.emp_no = b.emp_no
+   and b.to_date = '9999-01-01'
+   and concat(a.first_name, ' ', a.last_name) = 'Fai Bale';
+
+
+-- ex2) 현재 전체 사원의 평균연봉 보다 적은 급여를 받는 사원의 이름, 급여를 출력해라.
+select *
+from employees a, salaries b
+where a.emp_no = b.emp_no
+ad b.to_date='9999-01-01'
+and b.salary < (select avg(salary)
+                from salaries 
+                where to_date ='9999-01-01')
+order by b.salary desc;
+
+-- 다중행
+-- any : =any, >any, <any, ,<>any(!=any), <=any, >=any
+
+
+select a.name, b.name
+ 
+ from emp a
+
+  left join depart b on a.depart_no = b.no;
+
+
+-- left join
+
+
+
+select a.name, ifnull(b.name, '없음')
+ 
+ from emp a
+ 
+ left join depart b on a.depart_no = b.no;
+
+
+
+-- right join
+
+
+
+select b.name, a.name
+ 
+ from emp a
+ 
+ right join depart b on a.depart_no = b.no
+
+  group by b.name;
+
+
+-- 부서별 사원수
+
+select m.name
+
+   from depart m
+ 
+    (select b.no, count(emp) as cnt
+   
+  from emp a
+   
+     join depart b on a.depart_no = b.no
+ 
+ group by b.no) n
+
+where m.no = n.no;
+
+
+
+
+
+select m.name, ifnull(n.cnt, 0)
+ 
+     from depart m
+ 
+left join  (select  b.no, count(*) as cnt
+    
+    from emp a
+    
+    join depart b on a.depart_no = b.no
+ 
+ group by b.no) n on m.no = n.no;
+
+
+
+
+
+-- Fai Bale이 근무하는 부서에서 근무하는 직원의 사번, 전체 이름을 출력해보세요
+.
+
+-- 개별 쿼리 해결 -> 안좋은 방법(절대 하지 마라, 가능하면 하나의 쿼리로 해결)
+
+
+
+
+select b.dept_no
+ 
+ from employees a, dept_emp b
+ 
+ where a.emp_no = b.emp_no
+  
+ and b.to_date = '9999-01-01'
+ 
+  and concat(a.first_name, ' ', a.last_name) = 'Fai Bale';
+
+
+-- 서브쿼리를 사용해서 하나의 쿼리로 해결 
+
+ 
+
+select a.emp_no, concat(first_name ' ', last_name)
+ 
+ from employees a, dept_emp b
+ 
+ where a.emp_no = b.emp_no
+ 
+  and b.to_date = '9999-01-01'
+ 
+  and b.dept_no = 'd004';
+
+
+
+
+
+
+
+select b.dept_no
+ 
+ from employees a, dept_emp b
+  
+where a.emp_no = b.emp_no
+ 
+ and b.to_date = '9999-01-01'
+  
+ and concat(a.first_name, ' ', a.last_name) = 'Fai Bale';
+ 
+ 
+-- ex1 - sol2) 서브쿼리 사용
+
+select a.emp_no, concat(first_name ' ', last_name)
+ 
+ from employees a, dept_emp b
+ 
+ where a.emp_no = b.emp_no
+ 
+  and b.to_date = '9999-01-01'
+ 
+  and b.dept_no = (select b.dept_no
+ 
+ from employees a, dept_emp b
+ 
+ where a.emp_no = b.emp_no
+ 
+and b.to_date = '9999-01-01'
+   
+and concat(a.first_name, ' ', a.last_name) = 'Fai Bale'); 
+
+ 
+
+-- 단일행인 경우 : =, !=, >, <=, >= 
+
+
+ 
+
+
+
+-- ex1-sol3)
+
+-- join 사용
+
+select b.dept_no
+ 
+ from employees a, dept_emp b
+ 
+ where a.emp_no = b.emp_no
+  
+ and b.to_date = '9999-01-01'
+ 
+ and concat(a.first_name, ' ', a.last_name) = 'Fai Bale';
+
+
+
+
+
+-- ex2) 현재 전체 사원의 평균연봉 보다 적은 급여를 받는 사원의 이름, 급여를 출력해라.
+
+select *
+
+from employees a, salaries b
+
+where a.emp_no = b.emp_no
+
+and b.to_date='9999-01-01'
+
+and b.salary < (select avg(salary)
+              
+  from salaries 
+ 
+  where to_date ='9999-01-01')
+
+order by b.salary desc;
+
+
+
+
+-- 다중행
+-- any : =any, >any, <any, ,<>any(!=any), <=any, >=any
+
+-- all : =all, >all, <all, <>all (!=all, not in), <=all, >=all
+
+
+
+-- ex3) 현재 급여가 50000 이상인 직원 이름과 급여 출력
+
+-- sol1) join 으로 해결
+
+
+select a.first_name, b.salary
+
+from employees a, salaries b
+ 
+where a.emp_no = b.emp_no
+ 
+and b.to_date = '9999-01-01'
+
+ and b.salary > 50000;
+
+
+
+  -- sol2) 서브쿼리로 해결
+
+
+
+select a.first_name, b.salary
+
+from  employees a, salaries b
+
+where a.emp_no = b.emp_no
+
+and b.to_date = '9999-01-01'
+
+and(a.emp_no, b.salary) in 
+(select emp_no, salary
+from salaries	
+where to_date = '9999-01-01'
+
+and salary >50000);
+
+
+
+select a.first_name, b.salary
+
+from  employees a, 
+    
+ (select emp_no, salary
+	
+from salaries
+	
+where to_date = '9999-01-01'
+	
+and salary >50000) b
+
+where a.emp_no = b.emp_no;
+
+
+
+
+
+-- ex4) 현재 가장 적은 평균 급여를 받고 있는 직책의 평균 급여를 출력해보세요.
+
+
+select a.title, avg(salary) as avg_salary
+
+from titles a, salaries b
+
+where b.to_date = '9999-01-01'
+
+and a.to_date = '9999-01-01'
+
+and b.salary = (select avg(salary) as avg_salary
+
+where b.to_date = '9999-01-01'
+
+and a.to_date = '9999-01-01'
+
+and a.emp_no = b.emp_no
+
+group by a.title)
+
+order by avg_salary desc;
+
+
+
+
+
+select a.title, avg(b.salary) as avg_salary
+
+from titles a, salaries b
+
+where a.emp_no = b.emp_no
+
+and a.to_date = '9999-01-01'
+
+and b.to_date = '9999-01-01'
+
+group by a.title ;
+
+
+
+
+-- ex4 -sol2) top-k
+
+
+select a.title, avg(b.salary) as avg_salary
+
+from titles a, salaries b
+
+where a.emp_no = b.emp_no
+
+and a.to_date = '9999-01-01'
+
+and b.to_date = '9999-01-01'
+
+group by a.title 
+
+order by avg_salary asc
+  
+  limit 0, 1;
+    
+
+-- ex5 각 부서별로 최고 급여를 받는 직원의 이름과 급여를 출력하시오.
+
+select a.dept_no, max(b.salary)
+
+from dept_emp a, salaries b
+	
+where a.emp_no = b.emp_no
+
+and a.to_date = '9999-01-01'
+
+and b.to_date = '9999-01-01'
+
+group by a.dept_no;
+
+
+
+
+-- ex5 sol1) where 절 subquery
+
+select concat(a.first_name, ' ', a.last_name) as '이름', b.dept_no, c.salary, d.dept_name
+
+from employees a, dept_emp b, salaries c, departments d
+  
+ where  a.emp_no = b.emp_no
+
+ and b.emp_no = c.emp_no
+ 
+ and b.dept_no = d.dept_no
+  
+ and b.to_date = '9999-01-01'
+
+and c.to_date = '9999-01-01'
+   
+and (b.dept_no, c.salary) =any (select a.dept_no, max(b.salary)
+		
+from dept_emp a, salaries b
+
+where a.emp_no = b.emp_no
+	
+and a.to_date = '9999-01-01'
+	
+and b.to_date = '9999-01-01'
+				
+group by a.dept_no)
+order by (c.salary) desc;
+
+
+
+-- ex5 sol2 
+from 절 subquery
+
+select concat(a.first_name, ' ', a.last_name) as '이름', b.dept_no, c.salary, d.dept_name
+
+from employees a,
+    
+dept_emp b,
+     
+salaries c,
+     
+departments d,
+     
+(select a.dept_no, max(b.salary) as max_salary
+	
+from dept_emp a, salaries b
+	
+where a.emp_no = b.emp_no
+
+and a.to_date = '9999-01-01'
+
+and b.to_date = '9999-01-01'
+  ) e
+   
+ where  a.emp_no = b.emp_no
+  
+  and b.emp_no = c.emp_no
+  
+  and b.dept_no = d.dept_no
+ 
+ and b.to_date = '9999-01-01'
+
+and c.to_date = '9999-01-01'
+   
+ and b.dept_no = e.dept_no
+	
+and c.salary = e.max_salary
+ 
+  group by b.dept_no desc;
+
+select a.dept_no, max(b.salary) as max_salary
+	
+from dept_emp a, salaries b
+	
+where a.emp_no = b.emp_no
+	
+and a.to_date = '9999-01-01'
+	
+and b.to_date = '9999-01-01'
+
+group by a.dept_no;

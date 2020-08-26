@@ -1,0 +1,43 @@
+테이블 이름은 단수로
+
+오른쪽 마우스로 특성을 눌러 테이블 물리 이름 변경 
+
+
+컬럼탭에가서 물리이름에 바꾸고 데이터 타입 선택 int unsigned
+
+이름은 varchar(50) 데이터 규모가 크면 자동증가 선택 pk는필수
+
+
+eXERD 에서 포워드 엔지니어링 클릭
+
+
+트리거 뷰 체크해제
+
+이름 앞에 스키마 표시 체크해제
+
+외래키 
+채크
+유니크
+일반 체크
+
+
+기본 키 제약사항 삭제 체크해제
+
+
+1. 비밀(Last Fantasy[로엔],Common[CM]) - 아이유
+2. 비밀(Last Fantasy[로엔],Common[CM]) - 아이유
+
+
+select * from song
+select * from album
+select * from artist
+
+
+
+from song, artist
+where song.artist_no = artist.no;
+
+
+select a.title, b.name
+from song a, artist b
+where a.artist_no = b.no

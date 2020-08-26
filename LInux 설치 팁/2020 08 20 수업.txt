@@ -1,0 +1,91 @@
+\ 는 /bin/cp랑 같다.
+
+cp 명령어를 치면 alias 에서 vi로 cp를 cp -i로 기본설정 되어있기때문에 항상물어보지만
+/bin/cp로 치거나 \cp로 치면 alias에 있는 cp가아닌 그냥 cp이기때문에 물어보지않고 바로 복사가된다.
+
+
+vi /etc/bashrc
+
+명령이 중복되면 마지막 명령이 실행된다.
+
+
+less vi모드인데 편집이 되지 않는 extend 모드와 같다고 생각하면 좋다
+
+more 는 스페이스로 줄바꿈을 할 수있는 보기 모드
+
+find /var -name '*log*' -print 찾는방법 var에있는 로그라는 이름을 출력
+
+
+]# find /var -name '????log' 7글자의 log로 끝나는 파일을 출력 파일을 찾는데 유용
+
+find /home -user webmaster -name 'test' 웹마스터라는 계정안에있는 테스트라는 이름이 들어간 파일을 찾는 코드
+
+
+0번 콘솔
+
+1번 키보드
+
+2번 콘솔 에러 콘솔
+
+
+find / -user "webmaster" 2>/dev/null 허가거부가 났을때 에러 회피
+
+
+
+grep to -v /etc/profile 리버스 명령어로 to가 없는 문장만 출력해준다.
+
+ps -ef = 파이프로 결과값을 | grep 에게 모두 넘겨준다
+
+
+ps -ef | grep sshd | grep -v grep = 파이프로 sshd를 그랩해서 그안에서 grep 없는문장만 그랩해온다
+
+
+
+sort <word.txt> result.txt sorting 된 결과를 result.txt 로 보내는 명령어다.
+
+
+tar cvf webmaster.tar /home/webmaster 이렇게하면 홈밑에 웹마스터 디렉토리까지 다묶인다.
+
+
+gzip 명령어를 사용하면 자동으로 tar파일을 압축해준다.
+
+
+gzip -d webmaster.tar.gz 
+
+
+gzip 명령어는 tar명령어에서 z라는 키보드로 대체되어 사용된다.
+
+
+
+
+mv jdk1.8.0_261/ /usr/local/ds/jdk1.8
+
+#java
+export JAVA_HOME=/usr/local/ds/java
+export PATH=${PATH}:$(JAVA_HOME}/bin
+
+
+
+public class Hello {
+
+        public static void main(String[] args){
+              String s = "Hello World";
+              System.out.println(s);
+        }
+
+자바는 현재 디렉토리나 자바를 지정해서 찾는다
+
+CLASSPATH가 없으면 찾지못할수있다.
+
+vi/etc/profile
+
+
+export JAVA_HOME=/usr/local/ds/java
+export CLASSPATH=.:/usr/local/ds/java/lib/rt.jar
+(자바 파일을 현재나 자바가 깔려있는 곳에서 찾을 수 있게 vi 에디터를 수정한다.
+
+1 대 다에서 다쪽에 프라이머리 키를 만들어준다. (식별키)
+
+프라이머리키가 둘다 존재하면 비식별 관계가된다.
+
+

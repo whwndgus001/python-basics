@@ -1,0 +1,104 @@
+Python Virtual Environment (Isolation Tool)
+
+
+1. venv        :  python3.3 부터 기본 모듈에 포함 (표준)                    o
+2. virtualenv  :  python2부터 사용했던 가상환경 라이브러리               o
+3.pyenv	     : 
+4.conda	     : Anaconda Python 설치후, 사용가능하다.
+5.etc..         : virtualWrapper, buildout .....      
+
+
+
+
+
+
+
+venv로 파이썬 프로젝트 가상환경 만들기
+
+1. 프로젝트 디렉토리 만들기
+# mkdir log-analysis
+
+2.프로젝트 디렉토리로 가기
+# cd log-analysis
+
+3. 가상환경 생성하기
+# python3 -m venv venv
+
+가상환경을 만들었을 뿐이지 활성화를 시키지 않았다.
+
+가상환경 구동하는 방법
+
+4. 가상환경 구동(adtivate)
+#source venv/bin/activate
+
+5. 확인 (모든 개발은 가상환경에서 진행한다)
+(venv) # python
+
+6. 가상환경 떠나기
+
+#deactivate 
+
+C:/Python/Python37
+
+기본
+Do not import settings 위치설정
+
+darcular 로 설정
+
+configure  setting
+
+spelling 검색
+
+configure 파란글씨 클릭
+
+spelling Typo 체크해제
+
+Markdown 설치
+
+Create New Project
+
+Python-basics
+mysite
+emaillist
+guestbook
+
+project interpreter 내리기
+
+Location : D:\DataScience J_J\PycharmProject\python-basics
+
+venv Location : D:\DataScience J_J\PycharmProject\python-basics\venv
+
+Intergration Development Environment
+
+github 에 업로드
+
+
+VCS
+
+import
+
+터미널에서
+
+python-basics>git config --global user.email "본인 이메일"
+
+python-basics>git config --global user.name "본인 아이디"
+
+
+.gitignore 파일생성
+ README.md 파일 생성
+git init
+git commit -m "init commit"
+
+git add -A
+
+
+git remote add origin https://github.com/whwndgus001/python-basics.git
+
+git push -u origin master
+
+git add -A
+
+git commit -m "init commit"
+
+git push -u origin master
+

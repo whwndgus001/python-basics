@@ -1,0 +1,67 @@
+system 관리 : 
+	disk, 
+	account,
+	io,driver,
+	file, 
+	daemon(service),
+	sw install*(yum,compile 설치)
+	monitoring process,status
+
+
+network 관리 : 
+	network 설정
+
+	monitoring network status
+
+	iptables 관리(firewall 관리)\
+
+
+
+11101011 00010100
+
+00010100의 1의보수 는 11101011이 되고 1이 
+
+11110011
+
+
+11110101
+
+
+11110011
+00000101
+11110110
+
+
+00001010  : 10
+
+11110101  
+11번쨰
+
+
+netstat - ant | grep LISTEN
+
+-- 고정 아이피" /etc/sysconfig/network-scripts/ifcfg-eth0/
+BOOTPROTO=static
+
+IPADDR=192.168.1.11
+NETMASK=255.255.255.0
+GATEWAY=192.168.1.1
+
+
+# vi /etc/resolv.conf 
+nameserver 192.168.1.1
+
+--hostname alias : /etc/hosts
+
+--hostname 설정 : /etc/sysconfig/network
+NETWORKING=yes
+HOSTNAME=lx.kickscar.com
+
+
+ssh webmaster@jj
+
+
+
+/etc/init.d/netowrk restart
+
+
