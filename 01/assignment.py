@@ -44,5 +44,5 @@ y = 20
 print('===== before swap =====')
 print(x, y)
 x ,y = y, x
-print('===== before swap =====')
+print('===== after swap =====')
 print (x, y)
