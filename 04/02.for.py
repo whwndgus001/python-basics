@@ -26,8 +26,30 @@ else:
 
 # 1 ~ 10 합을 구하기
 sum = 0
-
-
 for i in range(1, 11):
     sum=sum+i
 print(sum)
+
+# break
+for n in range(10):
+    if n > 5 :
+        break
+    print(n, end=' ')
+else:
+    print('\n-------------')
+
+print("\n-------------------")
+# continue
+for n in range(10):
+    if n <= 5 :
+        continue
+    print(n, end=' ')
+else:
+    print('\n-------정상루프 종료- -----')
+
+for i in range(1, 10):
+    for j in range (1, 10):
+        print("%d x %d = %d" % (i, j, i*j))
+    print("-----------------------")
+
+(i)

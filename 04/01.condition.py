@@ -15,6 +15,8 @@ elif n < 0:
 else :
     print ('0')
 
+order = 'spam'
+
 if order == 'spam':
     price = 1000
 elif order == 'egg':
