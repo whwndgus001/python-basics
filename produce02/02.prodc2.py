@@ -4,14 +4,13 @@
 
 실행 결과:
 ‘/usr/local/‘bin’, ‘python’
-
-s = &quot;&quot;&quot;
-&lt;html&gt;
-&lt;body style=&#39;background-color:#ffff&#39;&gt;
-&lt;h4&gt;Click&lt;/h4&gt;
-&lt;a href=&#39;http://www.python.org&#39;&gt;Here&lt;/a&gt;
-&lt;p&gt;
-To connect to the most powerful tools in the world.
-&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;&quot;&quot;&quot;
+# s = """
+# <html>
+#     <body style='background-color:#ffff'>
+#         <h4>Click</h4>
+#         <a href='http://www.python.org'>Here</a>
+#         <p>
+#            To connect to the most powerful tools in the world.
+#         </p>
+#     </body>
+# </html>"""
