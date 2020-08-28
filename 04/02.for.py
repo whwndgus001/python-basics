@@ -45,11 +45,28 @@ for n in range(10):
         continue
     print(n, end=' ')
 else:
-    print('\n-------정상루프 종료- -----')
+    print('\n-------구구단 1-----')
 
 for i in range(1, 10):
     for j in range (1, 10):
         print("%d x %d = %d" % (i, j, i*j))
-    print("-----------------------")
 
-(i)
+    print("\n-----------구구단 2----------")
+
+#구구단
+for i in range(1, 10):
+    for j in range(1, 10):
+        print("{0} x {1} = {2}" .format (j, i, j * i), end='\t')
+    else:
+        print('')
+
+print('\n-----------삼각형-----------')
+for i in range(10):
+    for j in range(0 ,i+1):
+        print('*', end='')
+    else:
+        print('')
+
+print('\n--------삼각형2-------------')
+for i in range(10, 0, -1):
+    print('*' * i)
