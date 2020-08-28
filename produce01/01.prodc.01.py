@@ -6,7 +6,7 @@ try:
         print('3의 배수')
     elif a%3 !=0:
         print('3의 배수가 아닌 수')
-    else:
+    else: a=0
 except ValueError as e:
     print('정수가 아닙니다')
 
