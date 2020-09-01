@@ -17,7 +17,7 @@ g_f()
 print(g_a)
 #error : loca_symbol table은 함수가 실행이 끝나면 사라진다.
 # print(l_a)
-print('===== Object Symbol Table ====='
+print('===== Object Symbol Table =====')
 
 g_f.n = 'hello'
 g_f.i = 10
