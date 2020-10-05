@@ -1,5 +1,7 @@
 results = []
 numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+# numbers 순차형의 모든 내부 요소를 제곱
 for n in numbers:
     result = n * n
     results.append(result)
