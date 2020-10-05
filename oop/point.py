@@ -93,4 +93,7 @@ class ColorPoint(Point):    # 부모가 Point인 서브클래스
         self.color = color
 
     def draw(self):
-        print("{}색 점({}, {}, {})".format(self.x, self.y, self.color))
+        print("{}색 점({}, {})을 그렸습니다.".format(self.color, self.x, self.y))
+
+    def __str__(self): # 출력 포맷 변경
+        return "ColorPoint({}, {}, {})".format(self.x, self.y, self.color)
